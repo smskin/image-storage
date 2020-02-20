@@ -14,7 +14,7 @@ use SMSkin\ImageStorage\Exceptions\ValidationException;
 
 class Client
 {
-    protected $host = 'https://image-storage-260518.appspot.com';
+    protected $host = 'https://api.image-storage.ru';
 
     /**
      * @var string
