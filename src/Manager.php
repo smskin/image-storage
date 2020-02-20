@@ -23,11 +23,14 @@ class Manager implements IManager
 
     /**
      * Manager constructor.
-     * @throws Exceptions\ValidationException
+     * @param Client|null $client
      */
-    public function __construct()
+    public function __construct(Client $client = null)
     {
-        $this->client = new Client();
+        if (!$client){
+            $client = new Client();
+        }
+        $this->client = $client;
     }
 
     /**
@@ -70,5 +73,15 @@ class Manager implements IManager
         $this->client->delete(
             '/api/images/'.sha1($publicUrl)
         );
+    }
+
+    /**
+     * @param Client $client
+     * @return Manager
+     */
+    final public function setClient(Client $client): Manager
+    {
+        $this->client = $client;
+        return $this;
     }
 }
