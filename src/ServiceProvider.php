@@ -8,10 +8,12 @@
 
 namespace SMSkin\ImageStorage;
 
+use SMSkin\ImageStorage\Services\HttpService\Service as HttpService;
+use SMSkin\ImageStorage\Services\ImageService\Service as ImageService;
+use SMSkin\ImageStorage\Services\ImageManagerService\Service as ImageManagerService;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-    public const SINGLETON_ABSTRACT = 'ImageStorageImage';
-    
     /**
      * register the service provider
      *
@@ -19,12 +21,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     final public function register(): void
     {
-        $this->app->singleton(self::SINGLETON_ABSTRACT, function($app)
+        $this->app->singleton(ImageService::class, function()
         {
-            return new Image();
+            return new ImageService();
         });
 
-        $this->app->bind(\SMSkin\ImageStorage\Contracts\Manager::class, \SMSkin\ImageStorage\Manager::class);
+        $this->app->singleton(ImageManagerService::class, function()
+        {
+            return new ImageManagerService();
+        });
+
+        $this->app->singleton(HttpService::class, function()
+        {
+            return new HttpService();
+        });
 
         $this->registerHelper('render_helper.php');
     }
@@ -46,6 +56,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     final public function boot(): void
     {
         //publish configuration
+        /** @noinspection PhpUndefinedFunctionInspection */
         $this->publishes([
             __DIR__ . '/config/image-storage.php' => config_path('image-storage.php'),
         ], 'config');

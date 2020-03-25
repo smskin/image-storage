@@ -6,17 +6,13 @@
  * Time: 13:59
  */
 
-use SMSkin\ImageStorage\Image;
+use SMSkin\ImageStorage\Services\ImageService\Service as ImageService;
 
-if (!function_exists('is_image')){
-
-    /**
-     * @param string $url
-     * @return Image
-     */
-    function is_image(string $url): Image
-    {
-        $image = App::make(SMSkin\ImageStorage\ServiceProvider::SINGLETON_ABSTRACT);
-        return $image->setUrl($url);
+if (!function_exists('ist_image')){
+    function ist_image($url, string $format = null, int $quality = null){
+        /** @noinspection PhpUndefinedFunctionInspection */
+        $service = app()->make(ImageService::class);
+        /** @noinspection PhpUndefinedMethodInspection */
+        return $service->make($url, $format, $quality);
     }
 }

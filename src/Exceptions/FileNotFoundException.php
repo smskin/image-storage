@@ -8,9 +8,10 @@
 
 namespace SMSkin\ImageStorage\Exceptions;
 
+use RuntimeException;
 use Throwable;
 
-class FileNotFoundException extends \RuntimeException
+class FileNotFoundException extends RuntimeException
 {
     public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
 {

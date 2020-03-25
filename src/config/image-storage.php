@@ -6,9 +6,14 @@
  * Time: 14:07
  */
 
+use SMSkin\ImageStorage\Services\ImageService\Models\ImageModel;
+
 return [
-    'client'=>[
-        'user_api_token'=>env('IMAGE_STORAGE_USER_API_TOKEN',''),
-        'project_api_token'=>env('IMAGE_STORAGE_PROJECT_API_TOKEN',''),
+    'api_token'=>env('IMAGE_STORAGE_API_TOKEN',''),
+    'output'=>[
+        'image'=>[
+            'format'=>ImageModel::FORMAT_JPG,
+            'quality'=>90
+        ]
     ]
 ];
