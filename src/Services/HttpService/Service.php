@@ -33,7 +33,7 @@ class Service implements ServiceInterface
         );
         $response = $request->getBody()->getContents();
         if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response);
+            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
         }
         return $response;
     }
@@ -55,7 +55,7 @@ class Service implements ServiceInterface
         );
         $response = $request->getBody()->getContents();
         if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response);
+            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
         }
         return $response;
     }
@@ -77,7 +77,7 @@ class Service implements ServiceInterface
         );
         $response = $request->getBody()->getContents();
         if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response);
+            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
         }
         return $response;
     }
@@ -99,7 +99,7 @@ class Service implements ServiceInterface
         );
         $response = $request->getBody()->getContents();
         if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response);
+            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
         }
         return $response;
     }
@@ -119,7 +119,7 @@ class Service implements ServiceInterface
         );
         $response = $request->getBody()->getContents();
         if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response);
+            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
         }
         return $response;
     }
