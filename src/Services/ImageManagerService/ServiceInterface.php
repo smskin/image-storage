@@ -2,7 +2,7 @@
 
 namespace SMSkin\ImageStorage\Services\ImageManagerService;
 
-use SMSkin\ImageStorage\Services\HttpService\Exceptions\HttpException;
+use GuzzleHttp\Exception\ClientException;
 use SMSkin\ImageStorage\Services\ImageManagerService\Exceptions\ConfigException;
 use SMSkin\ImageStorage\Services\ImageManagerService\Exceptions\FileNotFoundException;
 use SMSkin\ImageStorage\Services\ImageManagerService\Models\ImageModel;
@@ -14,7 +14,7 @@ interface ServiceInterface
      * @param string|null $filename
      * @return ImageModel
      * @throws FileNotFoundException
-     * @throws HttpException
+     * @throws ClientException
      * @throws ConfigException
      */
     public function upload(string $path, string $filename = null): ImageModel;
@@ -22,7 +22,7 @@ interface ServiceInterface
     /**
      * @param string $publicUrl
      * @throws ConfigException
-     * @throws HttpException
+     * @throws ClientException
      */
     public function delete(string $publicUrl): void;
 }

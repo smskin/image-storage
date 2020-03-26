@@ -2,7 +2,7 @@
 
 namespace SMSkin\ImageStorage\Services\HttpService;
 
-use SMSkin\ImageStorage\Services\HttpService\Exceptions\HttpException;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Client;
 use stdClass;
 
@@ -21,7 +21,7 @@ class Service implements ServiceInterface
     /**
      * @param string $url
      * @return stdClass
-     * @throws HttpException
+     * @throws ClientException
      */
     public function get(string $url): string
     {
@@ -31,18 +31,14 @@ class Service implements ServiceInterface
                 'headers' => $this->getHeaders()
             ]
         );
-        $response = $request->getBody()->getContents();
-        if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
-        }
-        return $response;
+        return $request->getBody()->getContents();
     }
 
     /**
      * @param string $url
      * @param array $formData
      * @return stdClass
-     * @throws HttpException
+     * @throws ClientException
      */
     public function post(string $url, array $formData = []): string
     {
@@ -53,18 +49,14 @@ class Service implements ServiceInterface
                 'form_params' => $formData
             ]
         );
-        $response = $request->getBody()->getContents();
-        if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
-        }
-        return $response;
+        return $request->getBody()->getContents();
     }
 
     /**
      * @param string $url
      * @param array $formData
      * @return stdClass
-     * @throws HttpException
+     * @throws ClientException
      */
     public function put(string $url, array $formData = []): string
     {
@@ -75,18 +67,14 @@ class Service implements ServiceInterface
                 'form_params' => $formData
             ]
         );
-        $response = $request->getBody()->getContents();
-        if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
-        }
-        return $response;
+        return $request->getBody()->getContents();
     }
 
     /**
      * @param string $url
      * @param array $formData
      * @return stdClass
-     * @throws HttpException
+     * @throws ClientException
      */
     public function multipartPost(string $url, array $formData = []): string
     {
@@ -97,17 +85,13 @@ class Service implements ServiceInterface
                 'multipart' =>  $formData
             ]
         );
-        $response = $request->getBody()->getContents();
-        if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
-        }
-        return $response;
+        return $request->getBody()->getContents();
     }
 
     /**
      * @param string $url
      * @return stdClass
-     * @throws HttpException
+     * @throws ClientException
      */
     public function delete(string $url): string
     {
@@ -117,11 +101,7 @@ class Service implements ServiceInterface
                 'headers' => $this->getHeaders()
             ]
         );
-        $response = $request->getBody()->getContents();
-        if ($request->getStatusCode() !== 200){
-            throw new HttpException('Http exception. '.$request->getStatusCode().'. '.$response, $request->getStatusCode());
-        }
-        return $response;
+        return $request->getBody()->getContents();
     }
 
     private function getHeaders(): array
@@ -148,6 +128,9 @@ class Service implements ServiceInterface
         return $this;
     }
 
+    /**
+     * @return Client
+     */
     private function getClient(): Client
     {
         /** @noinspection PhpUndefinedFunctionInspection */
